@@ -27,3 +27,6 @@
         inference_model/juneli/finetune/table_rec/pd2pt.pt
     基于私人数据训练的有线表格识别模型（目前场景比较固定，后续会继续泛化，使用者也可自行finetune）：
         inference_model/juneli/finetune/table_rec/best.pt
+        
+# 参考
+[PPOCR](https://github.com/PaddlePaddle/PaddleOCR)
