@@ -1,0 +1,63 @@
+Global:
+  use_gpu: '3'
+  # evaluation is run every 400 iterations after the 0th iteration
+  save_model_dir: /
+  checkpoints: /workspace/JuneLi/bbtv/ExpCode/RARE/inference_model/baidu/infer/table_rec/pd2pt.pt
+#  checkpoints: /workspace/JuneLi/bbtv/ExpCode/RARE/inference_model/juneli/finetune/table_rec/last.pt
+  character_dict_path: utils/dict/table_structure_dict.txt
+  character_type: en
+  max_text_length: 100
+  max_elem_length: 800
+  max_cell_num: 500
+
+Architecture:
+  model_type: table
+  algorithm: TableAttn
+  Backbone:
+    name: MobileNetV3
+    scale: 1.0
+    model_name: large
+  Head:
+    name: TableAttentionHead
+    hidden_size: 256
+    l2_decay: 0.00001
+    loc_type: 2
+    max_text_length: 100
+    max_elem_length: 800
+    max_cell_num: 500
+
+PostProcess:
+  name: TableLabelDecode
+
+Metric:
+  name: TableMetric
+  main_indicator: acc
+
+Eval:
+  dataset:
+    name: PubTabDataSet
+    data_dir: /workspace/JuneLi/bbtv/ExpCode/RARE/datasets/public/pubtabnet_split/val/
+    label_file_path: /workspace/JuneLi/bbtv/ExpCode/RARE/datasets/public/pubtabnet_split/val.json
+#    data_dir: /workspace/JuneLi/bbtv/ExpCode/RARE/datasets/private/FundScan/images/
+#    label_file_path: /workspace/JuneLi/bbtv/ExpCode/RARE/datasets/private/FundScan/val.json
+    transforms:
+      - DecodeImage: # load image
+          img_mode: BGR
+          channel_first: False
+      - ResizeTableImage:
+          max_len: 488
+      - TableLabelEncode:
+      - NormalizeImage:
+          scale: 1./255.
+          mean: [0.485, 0.456, 0.406]
+          std: [0.229, 0.224, 0.225]
+          order: 'hwc'
+      - PaddingTableImage:
+      - ToCHWImage:
+      - KeepKeys:
+          keep_keys: ['image', 'structure', 'bbox_list', 'sp_tokens', 'bbox_list_mask']
+  loader:
+    shuffle: False
+    drop_last: False
+    batch_size_per_card: 128
+    num_workers: 8
