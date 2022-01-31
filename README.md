@@ -8,7 +8,7 @@
 
 # DATASETS
 ## Public：
-[PubTabNet](https://github.com/ibm-aur-nlp/PubTabNet): 与训练使用了这个数据集，可自行去官网下载。    
+[PubTabNet](https://github.com/ibm-aur-nlp/PubTabNet): 预训练使用了这个数据集，可自行去官网下载。    
     
 ## Private：
 私人数据暂不公开，后期会提供table cell box格式转HTML代码。
