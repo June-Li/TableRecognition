@@ -7,6 +7,11 @@
 - [ ] 私有无线表格数据训练
 - [ ] 表格识别模型cell location回归优化
 
+# 环境
+    python：3.8
+    pytorch：1.7.1
+    CUDA：10.1
+
 # DATASETS
 ## Public：
 [PubTabNet](https://github.com/ibm-aur-nlp/PubTabNet): 预训练使用了这个数据集，可自行去官网下载。    
