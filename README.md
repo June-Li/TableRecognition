@@ -1,6 +1,7 @@
+*注：本项目只是做表格结构预测和cell location回归，如果需要填充内容，需要连接自己的OCR模块；
 - todo list
 - [x] 完成table cell box格式（box格式可以用来对单元格做检测，且可简化标注难度）转html算法
-- [x] paddle表格识别代码和预训练模型转pytorch，预训练模型代码script/
+- [x] paddle表格识别代码和预训练模型转pytorch，预训练模型转换代码script/paddle2pytorch.py
 - [x] 私有有线表格数据训练
     - [x] 训练、测试、inder代码重构
 - [ ] 私有无线表格数据训练
@@ -29,4 +30,4 @@
         inference_model/juneli/finetune/table_rec/best.pt
         
 # 参考
-[PPOCR](https://github.com/PaddlePaddle/PaddleOCR)
+[PPOCR](https://github.com/PaddlePaddle/PaddleOCR) 
